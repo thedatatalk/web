@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@17y2z-=nv*zw^8kw(5z0dp!q@l4@83)as_xruil0l4bsyd2c8'
+SECRET_KEY = os.getenv("SECRET_KEY")
+#SECRET_KEY = '@17y2z-=nv*zw^8kw(5z0dp!q@l4@83)as_xruil0l4bsyd2c8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -80,7 +85,22 @@ DATABASES = {
     }
 }
 
+'''
+DATABASES = {
+    "default": {
+        "ENGINE": os.getenv("DATABASE_ENGINE"),
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
+        "OPTIONS": {
+            "driver": "ODBC Driver 17 for SQL Server",
+        },
+    },
+}
 
+'''
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
